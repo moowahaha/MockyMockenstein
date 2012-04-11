@@ -22,14 +22,14 @@ class Rocket {
 class MethodIsCalledTest extends MockyMockenstein_TestCase {
     function testMethodIsCalled() {
         $mock = $this->mock('Motor');
-        $mock->shouldReceive('ignite');
+        $mock->will('ignite');
         $rocket = new Rocket();
         $rocket->launch();
     }
 
     function testStaticMethodIsCalled() {
         $mock = $this->mock('Motor');
-        $mock->staticShouldReceive('isAMotor');
+        $mock->willStatically('isAMotor');
         $rocket = new Rocket();
         $rocket->runChecks();
     }

@@ -6,7 +6,7 @@ class MockTest extends PHPUnit_Framework_TestCase {
     function testStubCreated() {
         $mock = new \MockyMockenstein\Mock('Abc');
         $this->assertEquals(
-            get_class($mock->shouldReceive('abc')),
+            get_class($mock->will('doSomething')),
             'MockyMockenstein\Stub'
         );
     }
@@ -14,7 +14,7 @@ class MockTest extends PHPUnit_Framework_TestCase {
     function testStaticStubCreated() {
         $mock = new \MockyMockenstein\Mock('Abc');
         $this->assertEquals(
-            get_class($mock->staticShouldReceive('abc')),
+            get_class($mock->willStatically('doSomethingElse')),
             'MockyMockenstein\StaticStub'
         );
     }
