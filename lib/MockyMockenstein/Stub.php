@@ -2,6 +2,7 @@
 namespace MockyMockenstein;
 
 class Stub {
+    protected $method_type = RUNKIT_ACC_PUBLIC;
     private $mock;
     private $return_value;
     private $run_count = 0;
@@ -21,10 +22,18 @@ class Stub {
         return $this->return_value;
     }
 
-    public function assertExpectationsAreMet() {
+    public function assertExpectationsAreMet($test) {
         if ($this->run_count != $this->expected_run_count) {
-            throw new CallCountException($this->mock->class_name, $this->method_name, $this->expected_run_count, $this->run_count);
+            $test->fail(
+                $this->toString() .
+                ' expected to be called ' . $this->expected_run_count .
+                ' times, actually called ' . $this->run_count. ' times'
+            );
         }
+    }
+
+    private function toString() {
+        return $this->mock->class_name . '::' . $this->method_name;
     }
 
     private function replaceOriginalMethod() {
@@ -38,7 +47,7 @@ class Stub {
             $this->method_name,
             '',
             "return \MockyMockenstein\Router::routeToStub('$class_name', '$this->method_name', func_get_args());",
-            RUNKIT_ACC_PUBLIC
+            $this->method_type
         );
     }
 }

@@ -12,15 +12,24 @@ class Mock {
 
     public function shouldReceive($method_name) {
         $stub = new Stub($this, $method_name);
-        Router::add($this, $stub);
-        $this->stubs[$method_name] = $stub;
-        return $stub;
+        return $this->addStub($stub);
     }
 
-    public function assertExpectationsAreMet() {
+    public function staticShouldReceive($method_name) {
+        $stub = new StaticStub($this, $method_name);
+        return $this->addStub($stub);
+    }
+
+    public function assertExpectationsAreMet($test) {
         foreach($this->stubs as $stub) {
-            $stub->assertExpectationsAreMet();
+            $stub->assertExpectationsAreMet($test);
         }
+    }
+
+    private function addStub($stub) {
+        Router::add($this, $stub);
+        $this->stubs[$stub->method_name] = $stub;
+        return $stub;
     }
 }
 

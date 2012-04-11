@@ -13,13 +13,24 @@ class Rocket {
     function launch() {
         $this->motor->ignite();
     }
+
+    function runChecks() {
+        Motor::isAMotor();
+    }
 }
 
-class SimpleExpectationTest extends MockyMockenstein_TestCase {
+class MethodIsCalledTest extends MockyMockenstein_TestCase {
     function testMethodIsCalled() {
         $mock = $this->mock('Motor');
         $mock->shouldReceive('ignite');
         $rocket = new Rocket();
         $rocket->launch();
+    }
+
+    function testStaticMethodIsCalled() {
+        $mock = $this->mock('Motor');
+        $mock->staticShouldReceive('isAMotor');
+        $rocket = new Rocket();
+        $rocket->runChecks();
     }
 }
