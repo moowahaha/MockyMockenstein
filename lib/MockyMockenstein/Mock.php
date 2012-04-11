@@ -10,12 +10,12 @@ class Mock {
         Router::clearAllFor($this);
     }
 
-    public function will($method_name) {
+    public function willReceive($method_name) {
         $stub = new Stub($this, $method_name);
         return $this->addStub($stub);
     }
 
-    public function willStatically($method_name) {
+    public function willStaticallyReceive($method_name) {
         $stub = new StaticStub($this, $method_name);
         return $this->addStub($stub);
     }
