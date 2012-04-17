@@ -1,36 +1,25 @@
 <?php
 
-class Motor {
-    function ignite() {
-    }
-}
-
-class Rocket {
-    function __construct() {
-        $this->motor = new Motor();
-    }
-
-    function launch() {
-        $this->motor->ignite();
-    }
-
-    function runChecks() {
-        Motor::isAMotor();
-    }
+class SomeClass {
 }
 
 class MethodIsCalledTest extends MockyMockenstein_TestCase {
-    function testMethodIsCalled() {
-        $mock = $this->mock('Motor');
-        $mock->willReceive('ignite');
-        $rocket = new Rocket();
-        $rocket->launch();
+    function testInstanceMethodIsCalled() {
+        $mock = $this->mockInstance('some mock');
+        $mock->willReceive('someMethodCall');
+        $mock->someMethodCall();
     }
 
     function testStaticMethodIsCalled() {
-        $mock = $this->mock('Motor');
-        $mock->willStaticallyReceive('isAMotor');
-        $rocket = new Rocket();
-        $rocket->runChecks();
+        $class = $this->mockClass('some mock');
+        $class::willReceive('someStaticMethodCall');
+        $class::someStaticMethodCall();
+    }
+
+    function testReplacingConstructor() {
+        $class = $this->mockClass('some mock');
+        $class::willReceive('new');
+        new $class();
     }
 }
+

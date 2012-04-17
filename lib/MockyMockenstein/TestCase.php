@@ -1,18 +1,30 @@
 <?php
 
 abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
-    private $mocks = array();
+    private $instance_mocks = array();
+    private $static_mocks = array();
 
-    protected function mock($class_name) {
-        $mock = new \MockyMockenstein\Mock($class_name);
-        $this->mocks[] = $mock;
+    protected function mockInstance($mock_name) {
+        $mock_builder = new \MockyMockenstein\MockBuilder($this);
+        $mock = $mock_builder->buildInstance($mock_name);
+        $this->instance_mocks[] = $mock;
+        return $mock;
+    }
+
+    protected function mockClass($mock_name) {
+        $mock_builder = new \MockyMockenstein\MockBuilder($this);
+        $mock = $mock_builder->buildClass($mock_name, $this);
+        $this->static_mocks[] = $mock;
         return $mock;
     }
 
     function tearDown() {
         parent::tearDown();
-        foreach($this->mocks as $mock) {
-            $mock->assertExpectationsAreMet($this);
+        foreach($this->instance_mocks as $mock) {
+            $mock->assertExpectationsAreMet();
+        }
+        foreach($this->static_mocks as $mock) {
+            $mock::assertExpectationsAreMet();
         }
         \MockyMockenstein\Router::clearAll();
     }

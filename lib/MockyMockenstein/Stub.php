@@ -1,17 +1,21 @@
 <?php
 namespace MockyMockenstein;
 
-class Stub {
-    protected $method_type = RUNKIT_ACC_PUBLIC;
-    private $mock;
+abstract class Stub {
+    protected $method_type;
+    private $mock_name;
+    private $mock_class_name;
+    private $test;
     private $return_value;
     private $run_count = 0;
     private $expected_run_count = 0;
     public $method_name;
 
-    public function __construct($mock, $method_name) {
-        $this->mock = $mock;
-        $this->method_name = $method_name;
+    public function __construct($params) {
+        $this->mock_name = $params['mock_name'];
+        $this->mock_class_name = $params['mock_class_name'];
+        $this->test = $params['test'];
+        $this->method_name = $params['method_name'];
 
         $this->replaceOriginalMethod();
     }
@@ -22,9 +26,9 @@ class Stub {
         return $this->return_value;
     }
 
-    public function assertExpectationsAreMet($test) {
+    public function assertExpectationsAreMet() {
         if ($this->run_count != $this->expected_run_count) {
-            $test->fail(
+            $this->test->fail(
                 $this->toString() .
                 ' expected to be called ' . $this->expected_run_count .
                 ' times, actually called ' . $this->run_count. ' times'
@@ -33,16 +37,14 @@ class Stub {
     }
 
     private function toString() {
-        return $this->mock->class_name . '::' . $this->method_name;
+        return $this->method_name . ' (' . $this->mock_name . ')';
     }
 
     private function replaceOriginalMethod() {
-        $class_name = $this->mock->class_name;
+        $class_name = $this->mock_class_name;
         $this->expected_run_count = 1;
 
-        $gen_method_function = method_exists($class_name, $this->method_name) ? 'runkit_method_redefine' : 'runkit_method_add';
-
-        $gen_method_function(
+        runkit_method_add(
             $class_name,
             $this->method_name,
             '',
