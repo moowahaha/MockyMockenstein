@@ -9,10 +9,10 @@ class SomeClass {
 class MonkeyPatchIntegrationTest extends MockyMockenstein_TestCase {
     function testInstanceMethodIsCalled() {
         $monkey_patch_instance = $this->monkeyPatchInstance('SomeClass');
-        $monkey_patch_instance->willReceive('someMethod');
+        $monkey_patch_instance->willReceive('someMethod')->andReturn('new');
 
         $instance = new SomeClass();
-        $instance->someMethod();
+        $this->assertEquals('new', $instance->someMethod());
     }
 
     function testOriginalMethodIsRestored() {

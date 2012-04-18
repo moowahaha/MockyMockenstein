@@ -27,6 +27,11 @@ abstract class Stub {
         return $this->return_value;
     }
 
+    public function andReturn($value) {
+        $this->return_value = $value;
+        return $this;
+    }
+
     public function assertExpectationsAreMet() {
         if ($this->run_count != $this->expected_run_count) {
             $this->test->fail(
