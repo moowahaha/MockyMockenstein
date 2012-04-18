@@ -25,9 +25,9 @@ abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
         return $instance;
     }
 
-    protected function monkeyPatchClass($mock_name) {
+    protected function monkeyPatchClass($class_name) {
         $monkey_patcher = new \MockyMockenstein\MonkeyPatcher($this);
-        $static = $monkey_patcher->patchClass($mock_name, $this);
+        $static = $monkey_patcher->patchClass($class_name, $this);
         $this->instance_replacements[] = $static;
         return $static;
     }
