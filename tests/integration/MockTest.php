@@ -1,9 +1,6 @@
 <?php
 
-class SomeClass {
-}
-
-class MethodIsCalledTest extends MockyMockenstein_TestCase {
+class MockIntegrationTest extends MockyMockenstein_TestCase {
     function testInstanceMethodIsCalled() {
         $mock = $this->mockInstance('some mock');
         $mock->willReceive('someMethodCall');

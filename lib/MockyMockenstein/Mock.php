@@ -14,7 +14,7 @@ abstract class Mock {
     }
 
     protected static function addStub($stub) {
-        Router::add(get_called_class(), $stub);
+        Router::add($stub->mock_class_name, $stub);
         self::$stubs[$stub->method_name] = $stub;
         return $stub;
     }

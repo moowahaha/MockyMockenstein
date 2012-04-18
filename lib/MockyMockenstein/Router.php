@@ -17,6 +17,11 @@ class Router {
 
     public static function clearAll() {
         unset_new_overload();
+        foreach (array_values(self::$routes) as $replacement) {
+            foreach (array_values($replacement) as $stub) {
+                $stub->destroy();
+            }
+        }
         self::$routes = array();
     }
 
