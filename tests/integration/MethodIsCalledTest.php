@@ -17,9 +17,15 @@ class MethodIsCalledTest extends MockyMockenstein_TestCase {
     }
 
     function testReplacingConstructor() {
-        $class = $this->mockClass('some mock');
-        $class::willReceive('new');
-        new $class();
+        $mock = $this->mockInstance('some mock');
+        $mock->willReceive('someMethodCall');
+
+        $class = $this->mockClass('some class');
+        $class::willInstantiate($mock);
+
+        $object = new $class();
+        $object->someMethodCall();
+        $this->assertEquals($mock::$mock_name, $object::$mock_name);
     }
 }
 
