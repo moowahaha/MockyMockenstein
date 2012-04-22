@@ -9,6 +9,7 @@ abstract class Stub {
     private $return_value;
     private $run_count = 0;
     private $expected_run_count = 0;
+    private $expected_parameters = array();
     public $mock_class_name;
     public $method_name;
 
@@ -21,8 +22,8 @@ abstract class Stub {
         $this->generateMethod();
     }
 
-    public function run() {
-        $params = func_get_args();
+    public function run($parameters = array()) {
+        $this->assertParameters($parameters);
         $this->run_count++;
         return $this->return_value;
     }
@@ -34,6 +35,11 @@ abstract class Stub {
 
     public function calledTimes($times) {
         $this->expected_run_count = (int)$times;
+        return $this;
+    }
+
+    public function with() {
+        $this->expected_parameters = func_get_args();
         return $this;
     }
 
@@ -66,6 +72,25 @@ abstract class Stub {
                 $this->backed_up_method,
                 $this->method_name
             );
+        }
+    }
+
+    private function assertParameters($parameters) {
+        if (empty($this->expected_parameters)) {
+            return;
+        }
+
+        if (count($parameters) != count($this->expected_parameters)) {
+            $this->test->fail(sprintf(
+                '%s expected %d parameters, got %d',
+                $this->toString(),
+                count($this->expected_parameters),
+                count($parameters)
+            ));
+        }
+
+        foreach($this->expected_parameters as $index => $expected) {
+            $expected->assert($parameters[$index], $index + 1);
         }
     }
 

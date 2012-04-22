@@ -32,6 +32,20 @@ abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
         return $static;
     }
 
+    protected function value($expected_value) {
+        return new \MockyMockenstein\ParameterChecker_Value(array(
+            'expected' => $expected_value,
+            'test' => $this
+        ));
+    }
+
+    protected function type($expected_type) {
+        return new \MockyMockenstein\ParameterChecker_Type(array(
+            'expected' => $expected_type,
+            'test' => $this
+        ));
+    }
+
     function tearDown() {
         parent::tearDown();
         foreach($this->static_replacements as $replacement) {
