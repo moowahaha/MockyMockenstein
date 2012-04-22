@@ -34,7 +34,9 @@ class Router {
         unset_new_overload();
         foreach (array_values(self::$routes) as $replacement) {
             foreach (array_values($replacement) as $stub) {
-                $stub->destroy();
+                if (is_a($stub, 'MockyMockenstein\Stub')) {
+                    $stub->destroy();
+                }
             }
         }
 

@@ -3,11 +3,7 @@
 class SomeSortOfOriginalClass {}
 class SomeSortOfReplacementClass {}
 
-class RouterTest extends PHPUnit_Framework_TestCase {
-    function tearDown() {
-        \MockyMockenstein\Router::clearAll();
-    }
-
+class RouterTest extends MockyMockenstein_TestCase {
     function testConstructorMapping() {
         \MockyMockenstein\Router::addConstructorOverride(
             'SomeSortOfOriginalClass',
@@ -33,16 +29,11 @@ class RouterTest extends PHPUnit_Framework_TestCase {
     }
 
     function testStubMapping() {
-        $stub = new \MockyMockenstein\StaticStub(array(
-            'mock_name' => 'whatever',
-            'mock_class_name' => 'SomeSortOfOriginalClass',
-            'test' => $this,
-            'method_name' => 'sayHello'
-        ));
-
-        $stub->andReturn('hello');
-
-        \MockyMockenstein\Router::add('SomeSortOfOriginalClass', $stub);
+        $mock_stub = $this->mockInstance('a stub');
+        $mock_stub->method_name = 'sayHello';
+        $mock_stub->willReceive('run')->andReturn('hello');
+        $mock_stub->willReceive('destroy')->calledAnytime();
+        \MockyMockenstein\Router::add('SomeSortOfOriginalClass', $mock_stub);
 
         $this->assertEquals(
             'hello',

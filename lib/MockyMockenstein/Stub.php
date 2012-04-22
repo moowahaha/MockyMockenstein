@@ -27,18 +27,30 @@ abstract class Stub {
         return $this->return_value;
     }
 
+    public function calledAnytime() {
+        $this->expected_run_count = null;
+        return $this;
+    }
+
+    public function calledTimes($times) {
+        $this->expected_run_count = (int)$times;
+        return $this;
+    }
+
     public function andReturn($value) {
         $this->return_value = $value;
         return $this;
     }
 
     public function assertExpectationsAreMet() {
-        if ($this->run_count != $this->expected_run_count) {
-            $this->test->fail(
-                $this->toString() .
-                ' expected to be called ' . $this->expected_run_count .
-                ' times, actually called ' . $this->run_count. ' times'
-            );
+        if ($this->expected_run_count != null) {
+            if ($this->run_count != $this->expected_run_count) {
+                $this->test->fail(
+                    $this->toString() .
+                    ' expected to be called ' . $this->expected_run_count .
+                    ' times, actually called ' . $this->run_count. ' times'
+                );
+            }
         }
     }
 

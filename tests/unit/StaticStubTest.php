@@ -23,4 +23,20 @@ class StaticStubTest extends BaseStubTest {
         $this->stub->andReturn('hello');
         $this->assertEquals('hello', $mock::method());
     }
+
+    function testCalledAnyNumberOfTimes() {
+        $mock = $this->mock;
+        $this->stub->calledAnytime();
+        $this->assertFalse($this->stubHasError('method (testing!) expected to be called 1 times, actually called 0 times'));
+    }
+
+    function testCalledNTimes() {
+        $mock = $this->mock;
+        $this->stub->calledTimes(3);
+        $this->assertTrue($this->stubHasError('method (testing!) expected to be called 3 times, actually called 0 times'));
+        $mock::method();
+        $this->assertTrue($this->stubHasError('method (testing!) expected to be called 3 times, actually called 1 times'));
+        $mock::method();
+        $mock::method();
+    }
 }
