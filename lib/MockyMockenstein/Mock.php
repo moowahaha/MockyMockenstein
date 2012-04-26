@@ -10,6 +10,7 @@ abstract class Mock {
     public static function assertExpectationsAreMet() {
         foreach(self::$stubs as $stub) {
             $stub->assertExpectationsAreMet();
+            $stub->destroy();
         }
     }
 

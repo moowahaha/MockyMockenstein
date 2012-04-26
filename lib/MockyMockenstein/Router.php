@@ -32,13 +32,6 @@ class Router {
 
     public static function clearAll() {
         unset_new_overload();
-        foreach (array_values(self::$routes) as $replacement) {
-            foreach (array_values($replacement) as $stub) {
-                if (is_a($stub, 'MockyMockenstein\Stub')) {
-                    $stub->destroy();
-                }
-            }
-        }
 
         if (function_exists(self::CONSTRUCTOR_ROUTER)) {
             runkit_function_remove(self::CONSTRUCTOR_ROUTER);

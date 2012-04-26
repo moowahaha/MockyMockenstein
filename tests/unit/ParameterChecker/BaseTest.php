@@ -1,6 +1,8 @@
 <?php
 
 abstract class ParameterChecker_BaseTest extends MockyMockenstein_TestCase {
+    private $mock_test;
+
     function setUp() {
         parent::setUp();
         $this->mock_test = $this->mockInstance('a test');

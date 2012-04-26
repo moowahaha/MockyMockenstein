@@ -25,13 +25,13 @@ class MockBuilder {
 
     private function generateClass($mock_name, $base_class) {
         $class_name = 'MockyMockensteinMock_' . self::$mock_count;
+        self::$mock_count++;
+
         eval("namespace MockyMockenstein;\nclass $class_name extends $base_class {}");
 
         $namespaced_class_name = '\MockyMockenstein\\' . $class_name;
         $namespaced_class_name::$test = $this->test;
         $namespaced_class_name::$mock_name = $mock_name;
-
-        self::$mock_count++;
 
         return $namespaced_class_name;
     }

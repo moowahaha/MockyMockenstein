@@ -61,10 +61,12 @@ abstract class Stub {
     }
 
     public function destroy() {
-        runkit_method_remove(
-            $this->mock_class_name,
-            $this->method_name
-        );
+        if (method_exists($this->mock_class_name, $this->method_name)) {
+            runkit_method_remove(
+                $this->mock_class_name,
+                $this->method_name
+            );
+        }
 
         if ($this->backed_up_method) {
             runkit_method_rename(
@@ -101,6 +103,8 @@ abstract class Stub {
     private function generateMethod() {
         $class_name = $this->mock_class_name;
         $this->expected_run_count = 1;
+
+        new \ReflectionClass($class_name); // just so PHP loads the class before runkit looks at it.
 
         if (method_exists($class_name, $this->method_name)) {
             $this->backed_up_method = $this->method_name . '_MockyMockensteinBackup';

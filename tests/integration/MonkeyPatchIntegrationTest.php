@@ -6,24 +6,27 @@ class SomeClass {
     }
 }
 
-class MonkeyPatchIntegrationTest extends MockyMockenstein_TestCase {
-    function testInstanceMethodIsCalled() {
-        $monkey_patch_instance = $this->monkeyPatchInstance('SomeClass');
-        $monkey_patch_instance->willReceive('someMethod')->andReturn('new');
-
-        $instance = new SomeClass();
-        $this->assertEquals('new', $instance->someMethod());
+class MonkeyPatchIntegrationTest extends BaseMockTest {
+    function setUp() {
+        parent::setUp();
+        $this->instance_mock = $this->monkeyPatchInstance('SomeClass');
+        $this->class_mock = $this->monkeyPatchClass('SomeClass');
     }
 
-    function testOriginalMethodIsRestored() {
+    function testInstanceMethodIsCalled() {
+        $this->instance_mock->willReceive('someMethodCall');
         $instance = new SomeClass();
-        $this->assertEquals('original', $instance->someMethod());
+        $instance->someMethodCall();
     }
 
     function testStaticMethodIsCalled() {
         $monkey_patch_class = $this->monkeyPatchClass('SomeClass');
         $monkey_patch_class->willReceive('someStaticMethodCall');
         SomeClass::someStaticMethodCall();
+    }
+
+    function testStaticMethodIsNotCalled() {
+        $this->class_mock->willNotReceive('someStaticMethodCall');
     }
 
     function testReplacingConstructor() {

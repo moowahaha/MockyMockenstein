@@ -1,34 +1,34 @@
 <?php
 
 abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
-    private $static_replacements = array();
-    private $instance_replacements = array();
+    private $mocks = array();
+    private $monkey_patches = array();
 
     protected function mockInstance($mock_name) {
         $mock_builder = new \MockyMockenstein\MockBuilder($this);
         $mock = $mock_builder->buildInstance($mock_name);
-        $this->static_replacements[] = $mock;
+        $this->mocks[] = $mock;
         return $mock;
     }
 
     protected function mockClass($mock_name) {
         $mock_builder = new \MockyMockenstein\MockBuilder($this);
         $mock = $mock_builder->buildClass($mock_name, $this);
-        $this->static_replacements[] = $mock;
+        $this->mocks[] = $mock;
         return $mock;
     }
 
     protected function monkeyPatchInstance($class_name) {
         $monkey_patcher = new \MockyMockenstein\MonkeyPatcher($this);
         $instance = $monkey_patcher->patchInstance($class_name);
-        $this->instance_replacements[] = $instance;
+        $this->monkey_patches[] = $instance;
         return $instance;
     }
 
     protected function monkeyPatchClass($class_name) {
         $monkey_patcher = new \MockyMockenstein\MonkeyPatcher($this);
         $static = $monkey_patcher->patchClass($class_name, $this);
-        $this->instance_replacements[] = $static;
+        $this->monkey_patches[] = $static;
         return $static;
     }
 
@@ -48,10 +48,10 @@ abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
 
     function tearDown() {
         parent::tearDown();
-        foreach($this->static_replacements as $replacement) {
+        foreach($this->mocks as $replacement) {
             $replacement::assertExpectationsAreMet();
         }
-        foreach($this->instance_replacements as $replacement) {
+        foreach($this->monkey_patches as $replacement) {
             $replacement->assertExpectationsAreMet();
         }
         \MockyMockenstein\Router::clearAll();
