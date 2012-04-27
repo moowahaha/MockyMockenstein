@@ -1,10 +1,9 @@
 <?php
 
-class Stub_InstanceBaseTest extends Stub_BaseTest {
+class Stub_InstanceTest extends Stub_BaseTest {
     function setUp() {
         parent::setUp();
-        $mock_builder = new \MockyMockenstein\MockBuilder($this->mock_test);
-        $this->mock = $mock_builder->buildInstance('testing!');
+        $this->mock = $this->mock_builder->buildInstance('testing!');
         $this->stub = $this->mock->willReceive('method');
     }
 

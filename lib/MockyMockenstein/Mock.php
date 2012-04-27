@@ -1,22 +1,18 @@
 <?php
 namespace MockyMockenstein;
 
-abstract class Mock {
-    protected static $stubs = array();
+abstract class Mock extends Replacement {
 
-    public static $mock_name;
-    public static $test;
+    protected function buildStub($method_name) {
+        $stub_class = $this->stub_class;
 
-    public static function assertExpectationsAreMet() {
-        foreach(self::$stubs as $stub) {
-            $stub->assertExpectationsAreMet();
-            $stub->destroy();
-        }
-    }
+        $stub = new $stub_class(array(
+            'mock_name' => $this->name,
+            'mock_class_name' => get_called_class(),
+            'test' => $this->test,
+            'method_name' => $method_name
+        ));
 
-    protected static function addStub($stub) {
-        Router::add($stub->mock_class_name, $stub);
-        self::$stubs[$stub->method_name] = $stub;
-        return $stub;
+        return $this->addStub($stub);
     }
 }

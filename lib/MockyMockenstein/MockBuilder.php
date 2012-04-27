@@ -11,29 +11,27 @@ class MockBuilder {
     }
 
     public function buildInstance($mock_name) {
-        $class_name = $this->generateClass($mock_name, 'InstanceMock');
-        $mock = new $class_name();
-
-        return $mock;
+        return $this->generateClass($mock_name, 'InstanceMock');
     }
 
     public function buildClass($mock_name) {
-        $class_name = $this->generateClass($mock_name, 'StaticMock');
-
-        return $class_name;
+        return $this->generateClass($mock_name, 'StaticMock');
     }
 
     private function generateClass($mock_name, $base_class) {
-        $class_name = 'MockyMockensteinMock_' . self::$mock_count;
+        $class_name = 'Mock_' . self::$mock_count;
         self::$mock_count++;
 
         eval("namespace MockyMockenstein;\nclass $class_name extends $base_class {}");
 
         $namespaced_class_name = '\MockyMockenstein\\' . $class_name;
-        $namespaced_class_name::$test = $this->test;
-        $namespaced_class_name::$mock_name = $mock_name;
+        $mock = new $namespaced_class_name();
 
-        return $namespaced_class_name;
+        $mock->class_name = $namespaced_class_name;
+        $mock->name = $mock_name;
+        $mock->test = $this->test;
+
+        return $mock;
     }
 }
 

@@ -31,14 +31,15 @@ class MonkeyPatchIntegrationTest extends BaseMockTest {
 
     function testReplacingConstructor() {
         $mock = $this->mockInstance('some mock');
-        $mock->willReceive('someMethodCall');
+        $mock->willReceive('someMethod');
 
         $monkey_patch_class = $this->monkeyPatchClass('SomeClass');
-        $monkey_patch_class->willInstantiate($mock);
+        $monkey_patch_class->willInstantiate($mock)->with($this->value('a'));
 
-        $object = new SomeClass();
-        $object->someMethodCall();
-        $this->assertEquals($mock::$mock_name, $object::$mock_name);
+        $replaced = new SomeClass('a');
+        $replaced->someMethod();
+
+        $this->assertEquals(get_class($mock), get_class($replaced));
     }
 }
 

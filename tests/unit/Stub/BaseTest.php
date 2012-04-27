@@ -2,9 +2,16 @@
 
 abstract class Stub_BaseTest extends MockyMockenstein_TestCase {
     protected $mock_test;
+    protected $mock_builder;
 
     function setUp() {
         $this->mock_test = $this->mockInstance('mock test');
+        $this->mock_builder = new \MockyMockenstein\MockBuilder($this->mock_test);
+    }
+
+    function tearDown() {
+        $this->mock->assertExpectationsAreMet();
+        parent::tearDown();
     }
 
     function testNotCalled() {

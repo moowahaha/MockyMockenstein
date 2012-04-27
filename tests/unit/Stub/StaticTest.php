@@ -1,12 +1,10 @@
 <?php
 
-class Stub_StaticBaseTest extends Stub_BaseTest {
+class Stub_StaticTest extends Stub_BaseTest {
     function setUp() {
         parent::setUp();
-        $mock_builder = new \MockyMockenstein\MockBuilder($this->mock_test);
-        $this->mock = $mock_builder->buildClass('testing!');
-        $mock = $this->mock;
-        $this->stub = $mock::willReceive('method');
+        $this->mock = $this->mock_builder->buildClass('testing!');
+        $this->stub = $this->mock->willReceive('method');
     }
 
     function testCalled() {
@@ -16,8 +14,8 @@ class Stub_StaticBaseTest extends Stub_BaseTest {
     }
 
     function testReturnValue() {
-        $mock = $this->mock;
         $this->stub->andReturn('hello');
+        $mock = $this->mock;
         $this->assertEquals('hello', $mock::method());
     }
 

@@ -3,6 +3,7 @@ namespace MockyMockenstein;
 
 abstract class Stub {
     protected $method_type;
+
     private $backed_up_method;
     private $mock_name;
     private $test;
@@ -10,6 +11,7 @@ abstract class Stub {
     private $run_count = 0;
     private $expected_run_count = 0;
     private $expected_parameters = array();
+
     public $mock_class_name;
     public $method_name;
 

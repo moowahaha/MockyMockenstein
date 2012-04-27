@@ -9,11 +9,17 @@ class MonkeyPatcher {
     }
 
     public function patchInstance($class_name) {
-        return new InstanceMonkeyPatch($class_name, $this->test);
+        $monkey_patch = new InstanceMonkeyPatch();
+        $monkey_patch->name = $class_name;
+        $monkey_patch->test = $this->test;
+        return $monkey_patch;
     }
 
     public function patchClass($class_name) {
-        return new StaticMonkeyPatch($class_name, $this->test);
+        $monkey_patch = new StaticMonkeyPatch();
+        $monkey_patch->name = $class_name;
+        $monkey_patch->test = $this->test;
+        return $monkey_patch;
     }
 }
 
