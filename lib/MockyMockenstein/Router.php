@@ -50,6 +50,10 @@ class Router {
     }
 
     public static function routeToStub($class_name, $method_name, $method_params) {
+        if (!isset(self::$routes[$class_name]) || !isset(self::$routes[$class_name][$method_name])) {
+            return;
+        }
+
         $stub = self::$routes[$class_name][$method_name];
         return $stub->run($method_params);
     }

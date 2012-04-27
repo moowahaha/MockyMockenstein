@@ -19,7 +19,7 @@ class ParameterChecker_TypeTest extends ParameterChecker_BaseTest {
         $this->assertError(
             'SomeArbitraryType',
             new SomeOtherArbitraryType(),
-            'Parameter 2 expected to be type of SomeArbitraryType',
+            'Parameter 2 expected to be type of SomeArbitraryType, got SomeOtherArbitraryType',
             2
         );
     }
@@ -28,7 +28,7 @@ class ParameterChecker_TypeTest extends ParameterChecker_BaseTest {
         $this->assertError(
             'SomeArbitraryType',
             'xyz',
-            'Parameter 2 expected to be type of SomeArbitraryType',
+            'Parameter 2 expected to be type of SomeArbitraryType, got xyz',
             2
         );
     }

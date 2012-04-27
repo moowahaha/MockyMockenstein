@@ -1,7 +1,7 @@
 <?php
 
 abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
-    protected $replacements = array();
+    private $replacements = array();
 
     protected function mockInstance($mock_name) {
         $mock_builder = new \MockyMockenstein\MockBuilder($this);
@@ -12,7 +12,7 @@ abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
 
     protected function mockClass($mock_name) {
         $mock_builder = new \MockyMockenstein\MockBuilder($this);
-        $mock = $mock_builder->buildClass($mock_name, $this);
+        $mock = $mock_builder->buildClass($mock_name);
         $this->replacements[] = $mock;
         return $mock;
     }
@@ -26,7 +26,7 @@ abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
 
     protected function monkeyPatchClass($class_name) {
         $monkey_patcher = new \MockyMockenstein\MonkeyPatcher($this);
-        $static = $monkey_patcher->patchClass($class_name, $this);
+        $static = $monkey_patcher->patchClass($class_name);
         $this->replacements[] = $static;
         return $static;
     }
