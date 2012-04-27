@@ -11,11 +11,11 @@ class MockBuilder {
     }
 
     public function buildInstance($mock_name) {
-        return $this->generateClass($mock_name, 'InstanceMock');
+        return $this->generateClass($mock_name, 'Replacement_Mock_Instance');
     }
 
     public function buildClass($mock_name) {
-        return $this->generateClass($mock_name, 'StaticMock');
+        return $this->generateClass($mock_name, 'Replacement_Mock_Static');
     }
 
     private function generateClass($mock_name, $base_class) {

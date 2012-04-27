@@ -1,8 +1,8 @@
 <?php
 namespace MockyMockenstein;
 
-class StaticMonkeyPatch extends MonkeyPatch {
-    protected $stub_class = '\MockyMockenstein\StaticStub';
+class Replacement_MonkeyPatch_Static extends Replacement_MonkeyPatch {
+    protected $stub_class = '\MockyMockenstein\Stub_Static';
 
     public function willInstantiate($mock) {
         Router::addConstructorOverride($this->name, $mock);

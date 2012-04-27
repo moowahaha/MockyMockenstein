@@ -1,7 +1,7 @@
 <?php
 namespace MockyMockenstein;
 
-abstract class Mock extends Replacement {
+abstract class Replacement_Mock extends Replacement {
 
     protected function buildStub($method_name) {
         $stub_class = $this->stub_class;

@@ -1,6 +1,6 @@
 <?php
 namespace MockyMockenstein;
 
-class StaticStub extends Stub {
+class Stub_Static extends Stub {
     protected $method_type = RUNKIT_ACC_STATIC;
 }

@@ -1,7 +1,7 @@
 <?php
 namespace MockyMockenstein;
 
-abstract class MonkeyPatch extends Replacement {
+abstract class Replacement_MonkeyPatch extends Replacement {
 
     protected function buildStub($method_name) {
         $stub_class = $this->stub_class;
