@@ -46,11 +46,11 @@ abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
     }
 
     function tearDown() {
-        parent::tearDown();
         foreach($this->replacements as $replacement) {
             $replacement->assertExpectationsAreMet();
         }
         \MockyMockenstein\Router::clearAll();
+        parent::tearDown();
     }
 }
 

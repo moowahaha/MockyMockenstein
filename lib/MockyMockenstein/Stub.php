@@ -54,9 +54,8 @@ abstract class Stub {
         if ($this->expected_run_count != null) {
             if ($this->run_count != $this->expected_run_count) {
                 $this->test->fail(
-                    $this->toString() .
-                    ' expected to be called ' . $this->expected_run_count .
-                    ' times, actually called ' . $this->run_count. ' times'
+                    $this->toString(
+                    ) . ' expected to be called ' . $this->expected_run_count . ' times, actually called ' . $this->run_count . ' times'
                 );
             }
         }
@@ -65,16 +64,13 @@ abstract class Stub {
     public function destroy() {
         if (method_exists($this->mock_class_name, $this->method_name)) {
             runkit_method_remove(
-                $this->mock_class_name,
-                $this->method_name
+                $this->mock_class_name, $this->method_name
             );
         }
 
         if ($this->backed_up_method) {
             runkit_method_rename(
-                $this->mock_class_name,
-                $this->backed_up_method,
-                $this->method_name
+                $this->mock_class_name, $this->backed_up_method, $this->method_name
             );
         }
     }
@@ -85,15 +81,15 @@ abstract class Stub {
         }
 
         if (count($parameters) != count($this->expected_parameters)) {
-            $this->test->fail(sprintf(
-                '%s expected %d parameters, got %d',
-                $this->toString(),
-                count($this->expected_parameters),
-                count($parameters)
-            ));
+            $this->test->fail(
+                sprintf(
+                    '%s expected %d parameters, got %d', $this->toString(), count($this->expected_parameters),
+                    count($parameters)
+                )
+            );
         }
 
-        foreach($this->expected_parameters as $index => $expected) {
+        foreach ($this->expected_parameters as $index => $expected) {
             $expected->assert($parameters[$index], $index + 1);
         }
     }
@@ -108,22 +104,25 @@ abstract class Stub {
 
         new \ReflectionClass($class_name); // just so PHP loads the class before runkit looks at it.
 
+        // we need to copy and redefine if exists or add, rather than rename and replace because, for some reason,
+        // the latter will cause segfaults when php is cleaning itself up. this works though!
         if (method_exists($class_name, $this->method_name)) {
             $this->backed_up_method = $this->method_name . '_MockyMockensteinBackup';
-            runkit_method_rename(
-                $class_name,
-                $this->method_name,
-                $this->backed_up_method
+            runkit_method_copy(
+                $class_name, $this->backed_up_method, $class_name, $this->method_name
+            );
+            runkit_method_redefine(
+                $class_name, $this->method_name, '',
+                "return \MockyMockenstein\Router::routeToStub('$class_name', '$this->method_name', func_get_args());",
+                $this->method_type
+            );
+        } else {
+            runkit_method_add(
+                $class_name, $this->method_name, '',
+                "return \MockyMockenstein\Router::routeToStub('$class_name', '$this->method_name', func_get_args());",
+                $this->method_type
             );
         }
-
-        runkit_method_add(
-            $class_name,
-            $this->method_name,
-            '',
-            "return \MockyMockenstein\Router::routeToStub('$class_name', '$this->method_name', func_get_args());",
-            $this->method_type
-        );
     }
 }
 
