@@ -7,7 +7,7 @@ abstract class Stub_BaseTest extends MockyMockenstein_TestCase {
     private $stub;
 
     function setUp() {
-        $this->mock_test = $this->mockInstance('mock test');
+        $this->mock_test = $this->buildMockInstance('mock test');
         $this->mock_builder = new \MockyMockenstein\MockBuilder($this->mock_test);
         $this->mock = $this->setUpMock();
         $this->stub = $this->mock->willReceive('method');

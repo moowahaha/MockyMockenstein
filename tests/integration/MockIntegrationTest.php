@@ -3,8 +3,8 @@
 class MockIntegrationTest extends BaseMockTest {
     function setUp() {
         parent::setUp();
-        $this->instance_mock = $this->mockInstance('some mock');
-        $this->class_mock = $this->mockClass('some mock');
+        $this->instance_mock = $this->buildMockInstance('some mock');
+        $this->class_mock = $this->buildMockClass('some mock');
     }
 
     function testInstanceMethodIsCalled() {
@@ -22,7 +22,7 @@ class MockIntegrationTest extends BaseMockTest {
         $instance_mock = $this->instance_mock;
         $instance_mock->willReceive('someMethod');
 
-        $class = $this->mockClass('some class');
+        $class = $this->buildMockClass('some class');
         $class->willInstantiate($instance_mock)->with($this->value('a'));
 
         $replaced = new $class('a');

@@ -9,8 +9,8 @@ class SomeClass {
 class MonkeyPatchIntegrationTest extends BaseMockTest {
     function setUp() {
         parent::setUp();
-        $this->instance_mock = $this->monkeyPatchInstance('SomeClass');
-        $this->class_mock = $this->monkeyPatchClass('SomeClass');
+        $this->instance_mock = $this->monkeyPatchInstanceOf('SomeClass');
+        $this->class_mock = $this->monkeyPatchClassOf('SomeClass');
     }
 
     function testInstanceMethodIsCalled() {
@@ -20,22 +20,33 @@ class MonkeyPatchIntegrationTest extends BaseMockTest {
     }
 
     function testStaticMethodIsCalled() {
-        $monkey_patch_class = $this->monkeyPatchClass('SomeClass');
+        $monkey_patch_class = $this->monkeyPatchClassOf('SomeClass');
         $monkey_patch_class->willReceive('someStaticMethodCall');
         SomeClass::someStaticMethodCall();
     }
 
     function testReplacingConstructor() {
-        $mock = $this->mockInstance('some mock');
+        $mock = $this->buildMockInstance('some mock');
         $mock->willReceive('someMethod');
 
-        $monkey_patch_class = $this->monkeyPatchClass('SomeClass');
+        $monkey_patch_class = $this->monkeyPatchClassOf('SomeClass');
         $monkey_patch_class->willInstantiate($mock)->with($this->value('a'));
 
         $replaced = new SomeClass('a');
         $replaced->someMethod();
 
         $this->assertEquals(get_class($mock), get_class($replaced));
+    }
+
+    function testNonExistentClass() {
+        $exception = null;
+        try {
+            $this->monkeyPatchClassOf('WHATEVER');
+        } catch (\MockyMockenstein\Exception $e) {
+            $exception = $e->getMessage();
+        }
+
+        $this->assertEquals('Cannot monkey patch WHATEVER: No such class WHATEVER.', $exception);
     }
 }
 

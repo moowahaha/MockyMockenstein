@@ -126,8 +126,6 @@ abstract class Stub {
         $class_name = $this->mock_class_name;
         $this->expected_run_count = 1;
 
-        new \ReflectionClass($class_name); // just so PHP loads the class before runkit looks at it.
-
         // we need to copy and redefine if exists or add, rather than rename and replace because, for some reason,
         // the latter will cause segfaults when php is cleaning itself up. this works though!
         if (method_exists($class_name, $this->method_name)) {
