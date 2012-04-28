@@ -18,11 +18,6 @@ class MockIntegrationTest extends BaseMockTest {
         $class::someStaticMethodCall();
     }
 
-    function testStaticMethodIsNotCalled() {
-        $class = $this->class_mock;
-        $class->willNotReceive('someStaticMethodCall');
-    }
-
     function testReplacingConstructor() {
         $instance_mock = $this->instance_mock;
         $instance_mock->willReceive('someMethod');

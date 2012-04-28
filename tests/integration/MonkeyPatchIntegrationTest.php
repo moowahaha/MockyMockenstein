@@ -25,10 +25,6 @@ class MonkeyPatchIntegrationTest extends BaseMockTest {
         SomeClass::someStaticMethodCall();
     }
 
-    function testStaticMethodIsNotCalled() {
-        $this->class_mock->willNotReceive('someStaticMethodCall');
-    }
-
     function testReplacingConstructor() {
         $mock = $this->mockInstance('some mock');
         $mock->willReceive('someMethod');

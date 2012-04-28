@@ -7,4 +7,8 @@ abstract class BaseMockTest extends MockyMockenstein_TestCase {
     function testInstanceMethodIsNotCalled() {
         $this->instance_mock->willNotReceive('someMethodCall');
     }
+
+    function testStaticMethodIsNotCalled() {
+        $this->class_mock->willNotReceive('someStaticMethodCall');
+    }
 }
