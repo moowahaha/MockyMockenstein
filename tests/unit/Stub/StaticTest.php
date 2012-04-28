@@ -1,28 +1,11 @@
 <?php
 
 class Stub_StaticTest extends Stub_BaseTest {
-    function setUp() {
-        parent::setUp();
-        $this->mock = $this->mock_builder->buildClass('testing!');
-        $this->stub = $this->mock->willReceive('method');
+    protected function setUpMock() {
+        return $this->mock_builder->buildClass('testing!');
     }
 
-    function testCalled() {
-        $this->expectNoError();
-        $mock = $this->mock;
-        $mock::method();
-    }
-
-    function testReturnValue() {
-        $this->stub->andReturn('hello');
-        $mock = $this->mock;
-        $this->assertEquals('hello', $mock::method());
-    }
-
-    function testCalledNTimes() {
-        $this->expectErrorOf('method (testing!) expected to be called 3 times, actually called 1 times');
-        $this->stub->calledTimes(3);
-        $mock = $this->mock;
-        $mock::method();
+    protected function callMethod() {
+        return call_user_func_array(array(get_class($this->mock), 'method'), func_get_args());
     }
 }

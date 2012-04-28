@@ -41,7 +41,13 @@ abstract class Stub {
     }
 
     public function with() {
-        $this->expected_parameters = func_get_args();
+        $this->expected_parameters = array();
+
+        foreach (func_get_args() as $expected_param) {
+            $this->expected_parameters[] = is_a(
+                $expected_param, 'MockyMockenstein\\ParameterChecker'
+            ) ? $expected_param : new ParameterChecker_Value($expected_param);
+        }
         return $this;
     }
 
@@ -87,6 +93,7 @@ abstract class Stub {
                     count($parameters)
                 )
             );
+            return;
         }
 
         foreach ($this->expected_parameters as $index => $expected) {
