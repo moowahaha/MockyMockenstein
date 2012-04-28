@@ -16,24 +16,28 @@ abstract class Stub_BaseTest extends MockyMockenstein_TestCase {
     function testCalled() {
         $this->expectNoError();
         $this->callMethod();
+        $this->assertTrue($this->stub->areExpectationsMet());
     }
 
     function testReturnValue() {
         $this->expectNoError();
         $this->stub->andReturn('hello');
         $this->assertEquals('hello', $this->callMethod());
+        $this->assertTrue($this->stub->areExpectationsMet());
     }
 
     function testParameters() {
         $this->expectNoError();
         $this->stub->with($this->value('a'), $this->type('Stub_BaseTest'));
         $this->callMethod('a', $this);
+        $this->assertTrue($this->stub->areExpectationsMet());
     }
 
     function testDefaultParameterChecker() {
         $this->expectNoError();
         $this->stub->with('a', $this->type('Stub_BaseTest'));
         $this->callMethod('a', $this);
+        $this->assertTrue($this->stub->areExpectationsMet());
     }
 
     function testMissingParameters() {
@@ -42,10 +46,39 @@ abstract class Stub_BaseTest extends MockyMockenstein_TestCase {
         $this->callMethod();
     }
 
-    function testCalledNTimes() {
-        $this->expectErrorOf('method (testing!) expected to be called 3 times, actually called 1 times');
+    function testNotCalledNTimes() {
+        $this->expectErrorOf('method (testing!) expected to be called 3 times, actually called 2 times');
         $this->stub->calledTimes(3);
         $this->callMethod();
+        $this->callMethod();
+        $this->assertFalse($this->stub->areExpectationsMet());
+    }
+
+    function testCalledNTimes() {
+        $this->expectNoError();
+        $this->stub->calledTimes(2);
+        $this->callMethod();
+        $this->callMethod();
+        $this->assertTrue($this->stub->areExpectationsMet());
+    }
+
+    function testOrdered() {
+        $this->expectNoError();
+        $this->stub->with('first')->andReturn(1);
+        $this->mock->willReceive($this->stub->method_name)->with('second')->andReturn(2);
+
+        $this->assertEquals($this->callMethod('first'), 1);
+        $this->assertEquals($this->callMethod('second'), 2);
+        $this->assertTrue($this->stub->areExpectationsMet());
+    }
+
+    function testBadlyOrdered() {
+        $this->expectErrorOf("Parameter 1 expected to be value 'first', got 'second'");
+        $this->stub->with('first')->andReturn(1);
+        $this->mock->willReceive($this->stub->method_name)->with('second')->andReturn(2);
+
+        $this->callMethod('second');
+        $this->callMethod('first');
     }
 
     function testNotCalled() {
@@ -55,6 +88,13 @@ abstract class Stub_BaseTest extends MockyMockenstein_TestCase {
     function testCalledAnyNumberOfTimes() {
         $this->expectNoError();
         $this->stub->calledTimes(0);
+        $this->assertTrue($this->stub->areExpectationsMet());
+    }
+
+    function testUnexpectedCall() {
+        $this->expectErrorOf("method (testing!) did not expect to be called.");
+        $this->mock->willNotReceive($this->stub->method_name);
+        $this->callMethod();
     }
 
     function tearDown() {

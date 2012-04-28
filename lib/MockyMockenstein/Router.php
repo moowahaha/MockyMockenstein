@@ -11,19 +11,19 @@ class Router {
         unset(self::$routes[$mock->class_name]);
     }
 
-    public static function add($class_name, $stub) {
+    public static function add($class_name, $method_name, $stubs) {
         if (!isset(self::$routes[$class_name])) {
             self::$routes[$class_name] = array();
         }
-        self::$routes[$class_name][$stub->method_name] = $stub;
+
+        self::$routes[$class_name][$method_name] = $stubs;
     }
 
     public static function addConstructorOverride($old_class, $mock) {
         self::$constructors[$old_class] = get_class($mock);
 
         runkit_function_add(
-            self::CONSTRUCTOR_ROUTER,
-            '$requested_class_name',
+            self::CONSTRUCTOR_ROUTER, '$requested_class_name',
             'return \\MockyMockenstein\\Router::routeToClass($requested_class_name);'
         );
 
@@ -50,11 +50,16 @@ class Router {
     }
 
     public static function routeToStub($class_name, $method_name, $method_params) {
-        if (!isset(self::$routes[$class_name]) || !isset(self::$routes[$class_name][$method_name])) {
+        if (!isset(self::$routes[$class_name]) || !isset(self::$routes[$class_name][$method_name]) || empty(self::$routes[$class_name][$method_name])) {
             return;
         }
 
-        $stub = self::$routes[$class_name][$method_name];
-        return $stub->run($method_params);
+        $stub = self::$routes[$class_name][$method_name][0];
+        $return_value = $stub->run($method_params);
+        if ($stub->areExpectationsMet()) {
+            array_shift(self::$routes[$class_name][$method_name]);
+        }
+
+        return $return_value;
     }
 }

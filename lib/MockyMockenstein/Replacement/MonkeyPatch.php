@@ -13,7 +13,7 @@ abstract class Replacement_MonkeyPatch extends Replacement {
             'method_name' => $method_name
         ));
 
-        return $this->addStub($stub);
+        return $stub;
     }
 
 

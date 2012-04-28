@@ -33,7 +33,8 @@ class RouterTest extends MockyMockenstein_TestCase {
         $mock_stub->method_name = 'sayHello';
         $mock_stub->willReceive('run')->andReturn('hello');
         $mock_stub->willReceive('destroy')->calledAnytime();
-        \MockyMockenstein\Router::add('SomeSortOfOriginalClass', $mock_stub);
+        $mock_stub->willReceive('areExpectationsMet')->andReturn(true);
+        \MockyMockenstein\Router::add('SomeSortOfOriginalClass', 'sayHello', array($mock_stub));
 
         $this->assertEquals(
             'hello',

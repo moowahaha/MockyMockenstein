@@ -13,6 +13,6 @@ abstract class Replacement_Mock extends Replacement {
             'method_name' => $method_name
         ));
 
-        return $this->addStub($stub);
+        return $stub;
     }
 }

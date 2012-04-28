@@ -3,29 +3,39 @@
 namespace MockyMockenstein;
 
 abstract class Replacement {
-    protected $stubs = array();
+    private $stub_groups = array();
 
     public $name;
     public $test;
 
     public function assertExpectationsAreMet() {
-        foreach($this->stubs as $stub) {
-            $stub->assertExpectationsAreMet();
-            $stub->destroy();
+        foreach ($this->stub_groups as $stubs) {
+            foreach ($stubs as $stub) {
+                $stub->assertExpectationsAreMet();
+                $stub->destroy();
+            }
         }
     }
 
     public function willReceive($method_name) {
-        return $this->buildStub($method_name);
+        $stub = $this->buildStub($method_name);
+        $this->addStub($stub);
+        return $stub;
     }
 
     public function willNotReceive($method_name) {
-        return $this->buildStub($method_name)->calledTimes(0);
+        $stub = $this->buildStub($method_name)->calledTimes(0);
+        $this->stub_groups[$stub->method_name] = array();
+        $this->addStub($stub);
+        return $stub;
     }
 
-    protected function addStub($stub) {
-        Router::add($stub->mock_class_name, $stub);
-        $this->stubs[$stub->method_name] = $stub;
-        return $stub;
+    private function addStub($stub) {
+        if (!isset($stubs[$stub->method_name])) {
+            $stubs[$stub->method_name] = array();
+        }
+        $this->stub_groups[$stub->method_name][] = $stub;
+
+        Router::add($stub->mock_class_name, $stub->method_name, $this->stub_groups[$stub->method_name]);
     }
 }

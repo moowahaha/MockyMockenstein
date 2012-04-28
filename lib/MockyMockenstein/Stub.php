@@ -25,6 +25,12 @@ abstract class Stub {
     }
 
     public function run($parameters = array()) {
+        if ($this->expected_run_count === 0) {
+            $this->test->fail(
+                $this->toString() . ' did not expect to be called.'
+            );
+        }
+
         $this->assertParameters($parameters);
         $this->run_count++;
         return $this->return_value;
@@ -46,7 +52,7 @@ abstract class Stub {
         foreach (func_get_args() as $expected_param) {
             $this->expected_parameters[] = is_a(
                 $expected_param, 'MockyMockenstein\\ParameterChecker'
-            ) ? $expected_param : new ParameterChecker_Value($expected_param);
+            ) ? $expected_param : new ParameterChecker_Value(array('expected' => $expected_param, 'test' => $this->test));
         }
         return $this;
     }
@@ -56,14 +62,15 @@ abstract class Stub {
         return $this;
     }
 
+    public function areExpectationsMet() {
+        return $this->calledCorrectNumberOfTimes();
+    }
+
     public function assertExpectationsAreMet() {
-        if ($this->expected_run_count != null) {
-            if ($this->run_count != $this->expected_run_count) {
-                $this->test->fail(
-                    $this->toString(
-                    ) . ' expected to be called ' . $this->expected_run_count . ' times, actually called ' . $this->run_count . ' times'
-                );
-            }
+        if (!$this->calledCorrectNumberOfTimes()) {
+            $this->test->fail(
+                $this->toString() . ' expected to be called ' . $this->expected_run_count . ' times, actually called ' . $this->run_count . ' times'
+            );
         }
     }
 
@@ -79,6 +86,16 @@ abstract class Stub {
                 $this->mock_class_name, $this->backed_up_method, $this->method_name
             );
         }
+    }
+
+    private function calledCorrectNumberOfTimes() {
+        if ($this->expected_run_count != null) {
+            if ($this->run_count != $this->expected_run_count) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function assertParameters($parameters) {
