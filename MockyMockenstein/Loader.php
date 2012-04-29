@@ -2,6 +2,8 @@
 
 namespace MockyMockenstein;
 
+require "MockyMockenstein/TestCase.php";
+
 /**
  * SplClassLoader implementation that implements the technical interoperability
  * standards for PHP 5.3 namespaces and class names.
