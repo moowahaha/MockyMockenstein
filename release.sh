@@ -1,6 +1,7 @@
 #!/bin/sh
 
 rm *.tgz
+#pear channel-discover moowahaha.github.com/pear
 pear package
 cd tmp
 rm -fr pear

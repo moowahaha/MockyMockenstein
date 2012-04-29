@@ -6,8 +6,13 @@ Another PHP mocking framework. Doesn't do much. Not yet finished.
 Prerequisites
 ---------------
 
-* Install runkit: `sudo pecl install http://github.com/downloads/zenovich/runkit/runkit-1.0.2.tgz`
-* Install php-test-helpers: `pear channel-discover pear.phpunit.de && sudo pecl install phpunit/test_helpers`
+* Install runkit:
+    * `sudo pecl install http://github.com/downloads/zenovich/runkit/runkit-1.0.3.tgz`
+    * Add `extension=runkit.so` to you /etc/php.ini
+* Install php-test-helpers:
+    * `pear channel-discover pear.phpunit.de`
+    * `pecl install phpunit/test_helpers`
+    * Add
 
 Installation
 ------------
