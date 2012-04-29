@@ -11,7 +11,7 @@
   <active>yes</active>
  </lead>
  <date>2012-04-29</date>
- <time>12:17:28</time>
+ <time>13:35:41</time>
  <version>
   <release>0.2</release>
   <api>0.2</api>
@@ -26,26 +26,26 @@ https://github.com/moowahaha/MockyMockenstein#readme
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="b2c326b6643d0258743aa08c002a0862" name="lib/MockyMockenstein/Exception.php" role="php" />
-   <file baseinstalldir="/" md5sum="8bca5c5c555552f27f758e35bd0f4f26" name="lib/MockyMockenstein/Loader.php" role="php" />
-   <file baseinstalldir="/" md5sum="1631b1891e62cb5211603aa8b9468fe9" name="lib/MockyMockenstein/MockBuilder.php" role="php" />
-   <file baseinstalldir="/" md5sum="b37f5c9e0dc8982c827561479ab40c88" name="lib/MockyMockenstein/MonkeyPatcher.php" role="php" />
-   <file baseinstalldir="/" md5sum="75bf6a779a3743fa5a4c8008294ae7de" name="lib/MockyMockenstein/ParameterChecker.php" role="php" />
-   <file baseinstalldir="/" md5sum="034470a3a494713d835df90a9c5e7516" name="lib/MockyMockenstein/Replacement.php" role="php" />
-   <file baseinstalldir="/" md5sum="380f1e1e7927f48568c0fd637587ef99" name="lib/MockyMockenstein/Router.php" role="php" />
-   <file baseinstalldir="/" md5sum="dc3764bf5ce8a3608925a226a193a656" name="lib/MockyMockenstein/Stub.php" role="php" />
-   <file baseinstalldir="/" md5sum="defc2d07ae4e935bf14fd6c676993cca" name="lib/MockyMockenstein/TestCase.php" role="php" />
-   <file baseinstalldir="/" md5sum="988d11151b40d64011685597908d432d" name="lib/MockyMockenstein/ParameterChecker/Type.php" role="php" />
-   <file baseinstalldir="/" md5sum="3adb12ee98ebb14029acc73386eb767f" name="lib/MockyMockenstein/ParameterChecker/Value.php" role="php" />
-   <file baseinstalldir="/" md5sum="ddb832c553fa95334f80cfcdbb7ed94b" name="lib/MockyMockenstein/Replacement/Mock.php" role="php" />
-   <file baseinstalldir="/" md5sum="6526ca9c8f92772d4b102d5204fc169c" name="lib/MockyMockenstein/Replacement/MonkeyPatch.php" role="php" />
-   <file baseinstalldir="/" md5sum="6848884dd8e1f7980ae979a884f9c50c" name="lib/MockyMockenstein/Replacement/Mock/Instance.php" role="php" />
-   <file baseinstalldir="/" md5sum="99ba8e04b7f428612f9757207b5c1c98" name="lib/MockyMockenstein/Replacement/Mock/Static.php" role="php" />
-   <file baseinstalldir="/" md5sum="8d7033f22c6f3d8c8f0a73057f792980" name="lib/MockyMockenstein/Replacement/MonkeyPatch/Instance.php" role="php" />
-   <file baseinstalldir="/" md5sum="a8d155f35582d39f0a4bf1ce930104fe" name="lib/MockyMockenstein/Replacement/MonkeyPatch/Static.php" role="php" />
-   <file baseinstalldir="/" md5sum="f612a7ac08918c33ecac26cd8fd4df9c" name="lib/MockyMockenstein/Stub/Instance.php" role="php" />
-   <file baseinstalldir="/" md5sum="50d20e8c1e0c767bf3616f4b47405655" name="lib/MockyMockenstein/Stub/Static.php" role="php" />
-   <file baseinstalldir="/" md5sum="cf6b558ec94d067139512a4f838f21ff" name="tests/Bootstrap.php" role="test" />
+   <file baseinstalldir="/" md5sum="b2c326b6643d0258743aa08c002a0862" name="MockyMockenstein/Exception.php" role="php" />
+   <file baseinstalldir="/" md5sum="58d25d19a15001efbd7586f73676815b" name="MockyMockenstein/Loader.php" role="php" />
+   <file baseinstalldir="/" md5sum="1631b1891e62cb5211603aa8b9468fe9" name="MockyMockenstein/MockBuilder.php" role="php" />
+   <file baseinstalldir="/" md5sum="b37f5c9e0dc8982c827561479ab40c88" name="MockyMockenstein/MonkeyPatcher.php" role="php" />
+   <file baseinstalldir="/" md5sum="75bf6a779a3743fa5a4c8008294ae7de" name="MockyMockenstein/ParameterChecker.php" role="php" />
+   <file baseinstalldir="/" md5sum="034470a3a494713d835df90a9c5e7516" name="MockyMockenstein/Replacement.php" role="php" />
+   <file baseinstalldir="/" md5sum="380f1e1e7927f48568c0fd637587ef99" name="MockyMockenstein/Router.php" role="php" />
+   <file baseinstalldir="/" md5sum="dc3764bf5ce8a3608925a226a193a656" name="MockyMockenstein/Stub.php" role="php" />
+   <file baseinstalldir="/" md5sum="defc2d07ae4e935bf14fd6c676993cca" name="MockyMockenstein/TestCase.php" role="php" />
+   <file baseinstalldir="/" md5sum="988d11151b40d64011685597908d432d" name="MockyMockenstein/ParameterChecker/Type.php" role="php" />
+   <file baseinstalldir="/" md5sum="3adb12ee98ebb14029acc73386eb767f" name="MockyMockenstein/ParameterChecker/Value.php" role="php" />
+   <file baseinstalldir="/" md5sum="ddb832c553fa95334f80cfcdbb7ed94b" name="MockyMockenstein/Replacement/Mock.php" role="php" />
+   <file baseinstalldir="/" md5sum="6526ca9c8f92772d4b102d5204fc169c" name="MockyMockenstein/Replacement/MonkeyPatch.php" role="php" />
+   <file baseinstalldir="/" md5sum="6848884dd8e1f7980ae979a884f9c50c" name="MockyMockenstein/Replacement/Mock/Instance.php" role="php" />
+   <file baseinstalldir="/" md5sum="99ba8e04b7f428612f9757207b5c1c98" name="MockyMockenstein/Replacement/Mock/Static.php" role="php" />
+   <file baseinstalldir="/" md5sum="8d7033f22c6f3d8c8f0a73057f792980" name="MockyMockenstein/Replacement/MonkeyPatch/Instance.php" role="php" />
+   <file baseinstalldir="/" md5sum="a8d155f35582d39f0a4bf1ce930104fe" name="MockyMockenstein/Replacement/MonkeyPatch/Static.php" role="php" />
+   <file baseinstalldir="/" md5sum="f612a7ac08918c33ecac26cd8fd4df9c" name="MockyMockenstein/Stub/Instance.php" role="php" />
+   <file baseinstalldir="/" md5sum="50d20e8c1e0c767bf3616f4b47405655" name="MockyMockenstein/Stub/Static.php" role="php" />
+   <file baseinstalldir="/" md5sum="8e3ce45bd871459a51d4e54c3d176253" name="tests/Bootstrap.php" role="test" />
    <file baseinstalldir="/" md5sum="565582fe27367219fb33dec21444a8b3" name="tests/integration/BaseMockTest.php" role="test" />
    <file baseinstalldir="/" md5sum="bf2caf8995383572bc1b2a85d3434334" name="tests/integration/MockIntegrationTest.php" role="test" />
    <file baseinstalldir="/" md5sum="22c6bef74babd400b25bb3e0ce857d58" name="tests/integration/MonkeyPatchIntegrationTest.php" role="test" />
@@ -58,8 +58,8 @@ https://github.com/moowahaha/MockyMockenstein#readme
    <file baseinstalldir="/" md5sum="13c59530486d9dac25a6a56756be7af7" name="tests/unit/Stub/InstanceTest.php" role="test" />
    <file baseinstalldir="/" md5sum="3bf44ad55fe69247f751fc9c7f7d85b1" name="tests/unit/Stub/StaticTest.php" role="test" />
    <file baseinstalldir="/" md5sum="c948d73e363176f061f0189af5f4b1f8" name="phpunit.xml" role="data" />
-   <file baseinstalldir="/" md5sum="eef4b691ddd7452c79120ab1ed937a4a" name="README.md" role="data" />
-   <file baseinstalldir="/" md5sum="dfd1d7cdff66fda41e12ad125122278c" name="release.sh" role="data" />
+   <file baseinstalldir="/" md5sum="014c965654386daf94a4b4a1b13f698c" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="f738e53a2220326850ebcaba17031eaf" name="release.sh" role="data" />
   </dir>
  </contents>
  <dependencies>
