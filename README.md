@@ -26,7 +26,7 @@ Further info can be found on the [wiki](https://github.com/moowahaha/MockyMocken
 
 ### Setting up your test...
 
-Your test should inherit from MockyMockenstein_TestCase, rather than the usual
+Your test should inherit from MockyMockenstein_TestCase, rather than the usual PHPUnit_Framework_TestCase.
 
 ## Running the Tests (development)
 
