@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0         http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>MockyMockenstein</name>
+ <channel>moowahaha.github.com/pear</channel>
+ <summary>PHP mocking framework for allows regular &amp; static mocking plus monkey patching real classes.</summary>
+ <description>PHP mocking framework for allows regular &amp; static mocking plus monkey patching real classes.</description>
+ <lead>
+  <name>Stephen Hardisty</name>
+  <user>moowahaha</user>
+  <email>steve@hardisty.me</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-04-29</date>
+ <time>11:32:10</time>
+ <version>
+  <release>0.1</release>
+  <api>0.1</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+ <notes>
+https://github.com/moowahaha/MockyMockenstein#readme
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="b2c326b6643d0258743aa08c002a0862" name="lib/MockyMockenstein/Exception.php" role="php" />
+   <file baseinstalldir="/" md5sum="8bca5c5c555552f27f758e35bd0f4f26" name="lib/MockyMockenstein/Loader.php" role="php" />
+   <file baseinstalldir="/" md5sum="1631b1891e62cb5211603aa8b9468fe9" name="lib/MockyMockenstein/MockBuilder.php" role="php" />
+   <file baseinstalldir="/" md5sum="b37f5c9e0dc8982c827561479ab40c88" name="lib/MockyMockenstein/MonkeyPatcher.php" role="php" />
+   <file baseinstalldir="/" md5sum="75bf6a779a3743fa5a4c8008294ae7de" name="lib/MockyMockenstein/ParameterChecker.php" role="php" />
+   <file baseinstalldir="/" md5sum="034470a3a494713d835df90a9c5e7516" name="lib/MockyMockenstein/Replacement.php" role="php" />
+   <file baseinstalldir="/" md5sum="380f1e1e7927f48568c0fd637587ef99" name="lib/MockyMockenstein/Router.php" role="php" />
+   <file baseinstalldir="/" md5sum="dc3764bf5ce8a3608925a226a193a656" name="lib/MockyMockenstein/Stub.php" role="php" />
+   <file baseinstalldir="/" md5sum="defc2d07ae4e935bf14fd6c676993cca" name="lib/MockyMockenstein/TestCase.php" role="php" />
+   <file baseinstalldir="/" md5sum="988d11151b40d64011685597908d432d" name="lib/MockyMockenstein/ParameterChecker/Type.php" role="php" />
+   <file baseinstalldir="/" md5sum="3adb12ee98ebb14029acc73386eb767f" name="lib/MockyMockenstein/ParameterChecker/Value.php" role="php" />
+   <file baseinstalldir="/" md5sum="ddb832c553fa95334f80cfcdbb7ed94b" name="lib/MockyMockenstein/Replacement/Mock.php" role="php" />
+   <file baseinstalldir="/" md5sum="6526ca9c8f92772d4b102d5204fc169c" name="lib/MockyMockenstein/Replacement/MonkeyPatch.php" role="php" />
+   <file baseinstalldir="/" md5sum="6848884dd8e1f7980ae979a884f9c50c" name="lib/MockyMockenstein/Replacement/Mock/Instance.php" role="php" />
+   <file baseinstalldir="/" md5sum="99ba8e04b7f428612f9757207b5c1c98" name="lib/MockyMockenstein/Replacement/Mock/Static.php" role="php" />
+   <file baseinstalldir="/" md5sum="8d7033f22c6f3d8c8f0a73057f792980" name="lib/MockyMockenstein/Replacement/MonkeyPatch/Instance.php" role="php" />
+   <file baseinstalldir="/" md5sum="a8d155f35582d39f0a4bf1ce930104fe" name="lib/MockyMockenstein/Replacement/MonkeyPatch/Static.php" role="php" />
+   <file baseinstalldir="/" md5sum="f612a7ac08918c33ecac26cd8fd4df9c" name="lib/MockyMockenstein/Stub/Instance.php" role="php" />
+   <file baseinstalldir="/" md5sum="50d20e8c1e0c767bf3616f4b47405655" name="lib/MockyMockenstein/Stub/Static.php" role="php" />
+   <file baseinstalldir="/" md5sum="cf6b558ec94d067139512a4f838f21ff" name="tests/Bootstrap.php" role="test" />
+   <file baseinstalldir="/" md5sum="565582fe27367219fb33dec21444a8b3" name="tests/integration/BaseMockTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="bf2caf8995383572bc1b2a85d3434334" name="tests/integration/MockIntegrationTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="22c6bef74babd400b25bb3e0ce857d58" name="tests/integration/MonkeyPatchIntegrationTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="bc096c66e4b8b52f305bb83695569dcb" name="tests/unit/RouterTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="f58ccf8338275fd9a592e6369f685f0b" name="tests/unit/TestCaseTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="4da5ac3f6a9b37be4a5ec0c05b07cba0" name="tests/unit/ParameterChecker/BaseTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="69674ffd90d436bd736eb4d3aebc4945" name="tests/unit/ParameterChecker/TypeTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="c79299c6761c13f0ae50d0236b7038e0" name="tests/unit/ParameterChecker/ValueTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="7eaf0174c5e8083420fb8e7e4a0a1a85" name="tests/unit/Stub/BaseTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="13c59530486d9dac25a6a56756be7af7" name="tests/unit/Stub/InstanceTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="3bf44ad55fe69247f751fc9c7f7d85b1" name="tests/unit/Stub/StaticTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="c948d73e363176f061f0189af5f4b1f8" name="phpunit.xml" role="data" />
+   <file baseinstalldir="/" md5sum="0133801b104d57b2316dcf847287cc0e" name="README.md" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.3.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+  </required>
+  <optional>
+   <package>
+    <name>Hamcrest</name>
+    <channel>hamcrest.googlecode.com/svn/pear</channel>
+   </package>
+  </optional>
+ </dependencies>
+ <phprelease>
+  <filelist />
+ </phprelease>
+ <changelog>
+  <release>
+   <version>
+    <release>0.1</release>
+    <api>0.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2012-04-29</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+https://github.com/moowahaha/MockyMockenstein#readme
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.7.2</release>
+    <api>0.7.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2012-04-29</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+http://github.com/padraic/mockery#readme
+   </notes>
+  </release>
+ </changelog>
+</package>
