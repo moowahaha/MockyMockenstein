@@ -11,10 +11,10 @@
   <active>yes</active>
  </lead>
  <date>2012-04-29</date>
- <time>11:41:33</time>
+ <time>12:13:51</time>
  <version>
-  <release>0.1</release>
-  <api>0.1</api>
+  <release>0.1b</release>
+  <api>0.1b</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -58,7 +58,8 @@ https://github.com/moowahaha/MockyMockenstein#readme
    <file baseinstalldir="/" md5sum="13c59530486d9dac25a6a56756be7af7" name="tests/unit/Stub/InstanceTest.php" role="test" />
    <file baseinstalldir="/" md5sum="3bf44ad55fe69247f751fc9c7f7d85b1" name="tests/unit/Stub/StaticTest.php" role="test" />
    <file baseinstalldir="/" md5sum="c948d73e363176f061f0189af5f4b1f8" name="phpunit.xml" role="data" />
-   <file baseinstalldir="/" md5sum="0133801b104d57b2316dcf847287cc0e" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="0333b0382aeb6dd4304e6bc79b0b906c" name="README.md" role="data" />
+   <file baseinstalldir="/" md5sum="6102a7b556299250e3b88022aecb34f9" name="release.sh" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -80,6 +81,21 @@ https://github.com/moowahaha/MockyMockenstein#readme
   <filelist />
  </phprelease>
  <changelog>
+  <release>
+   <version>
+    <release>0.1b</release>
+    <api>0.1b</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2012-04-29</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+https://github.com/moowahaha/MockyMockenstein#readme
+   </notes>
+  </release>
   <release>
    <version>
     <release>0.1</release>
