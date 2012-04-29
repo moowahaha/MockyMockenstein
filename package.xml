@@ -74,10 +74,6 @@ https://github.com/moowahaha/MockyMockenstein#readme
     <channel>pear.phpunit.de</channel>
     <min>1.1.0</min>
    </package>
-   <package>
-    <name>runkit</name>
-    <channel>http://github.com/downloads/zenovich/runkit/runkit-1.0.2.tgz</channel>
-   </package>
   </required>
  </dependencies>
  <phprelease>
@@ -96,7 +92,7 @@ https://github.com/moowahaha/MockyMockenstein#readme
    <date>2012-04-29</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-https://github.com/moowahaha/MockyMockenstein#readme
+All instuctions can be found here: https://github.com/moowahaha/MockyMockenstein#readme
    </notes>
   </release>
   <release>
