@@ -12,7 +12,7 @@ Prerequisites
 * Install php-test-helpers:
     * `pear channel-discover pear.phpunit.de`
     * `pecl install phpunit/test_helpers`
-    * Add
+    * Add `zend_extension=test-helpers.so` to your /etc/php.ini. If you are using Xdebug, make sure this line goes after xdebug.so is loaded.
 
 Installation
 ------------
