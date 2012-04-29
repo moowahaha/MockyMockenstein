@@ -14,7 +14,7 @@ class MockBuilder {
         return $this->generateClass($mock_name, 'Replacement_Mock_Instance');
     }
 
-    public function buildClass($mock_name) {
+    public function buildStatic($mock_name) {
         return $this->generateClass($mock_name, 'Replacement_Mock_Static');
     }
 

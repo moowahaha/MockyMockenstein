@@ -2,7 +2,7 @@
 
 class Stub_StaticTest extends Stub_BaseTest {
     protected function setUpMock() {
-        return $this->mock_builder->buildClass('testing!');
+        return $this->mock_builder->buildStatic('testing!');
     }
 
     protected function callMethod() {

@@ -6,11 +6,11 @@ class SomeClass {
     }
 }
 
-class MonkeyPatchIntegrationTest extends BaseMockTest {
+class SpyIntegrationTest extends BaseMockTest {
     function setUp() {
         parent::setUp();
-        $this->instance_mock = $this->monkeyPatchInstanceOf('SomeClass');
-        $this->class_mock = $this->monkeyPatchClassOf('SomeClass');
+        $this->instance_mock = $this->spyForInstance('SomeClass');
+        $this->class_mock = $this->spyForStatic('SomeClass');
     }
 
     function testInstanceMethodIsCalled() {
@@ -20,17 +20,17 @@ class MonkeyPatchIntegrationTest extends BaseMockTest {
     }
 
     function testStaticMethodIsCalled() {
-        $monkey_patch_class = $this->monkeyPatchClassOf('SomeClass');
-        $monkey_patch_class->willReceive('someStaticMethodCall');
+        $spy_class = $this->spyForStatic('SomeClass');
+        $spy_class->willReceive('someStaticMethodCall');
         SomeClass::someStaticMethodCall();
     }
 
     function testReplacingConstructor() {
-        $mock = $this->buildMockInstance('some mock');
+        $mock = $this->buildInstanceMock('some mock');
         $mock->willReceive('someMethod');
 
-        $monkey_patch_class = $this->monkeyPatchClassOf('SomeClass');
-        $monkey_patch_class->willInstantiate($mock)->with($this->value('a'));
+        $spy_class = $this->spyForStatic('SomeClass');
+        $spy_class->willInstantiate($mock)->with($this->value('a'));
 
         $replaced = new SomeClass('a');
         $replaced->someMethod();
@@ -41,12 +41,12 @@ class MonkeyPatchIntegrationTest extends BaseMockTest {
     function testNonExistentClass() {
         $exception = null;
         try {
-            $this->monkeyPatchClassOf('WHATEVER');
+            $this->spyForStatic('WHATEVER');
         } catch (\MockyMockenstein\Exception $e) {
             $exception = $e->getMessage();
         }
 
-        $this->assertEquals('Cannot monkey patch WHATEVER: No such class WHATEVER.', $exception);
+        $this->assertEquals('Cannot spy on WHATEVER: No such class WHATEVER.', $exception);
     }
 }
 

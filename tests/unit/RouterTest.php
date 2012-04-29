@@ -29,7 +29,7 @@ class RouterTest extends MockyMockenstein_TestCase {
     }
 
     function testStubMapping() {
-        $mock_stub = $this->buildMockInstance('a stub');
+        $mock_stub = $this->buildInstanceMock('a stub');
         $mock_stub->method_name = 'sayHello';
         $mock_stub->willReceive('run')->andReturn('hello');
         $mock_stub->willReceive('destroy')->calledAnytime();

@@ -3,30 +3,30 @@
 abstract class MockyMockenstein_TestCase extends PHPUnit_Framework_TestCase {
     private $replacements = array();
 
-    protected function buildMockInstance($mock_name) {
+    protected function buildInstanceMock($mock_name) {
         $mock_builder = new \MockyMockenstein\MockBuilder($this);
         $mock = $mock_builder->buildInstance($mock_name);
         $this->replacements[] = $mock;
         return $mock;
     }
 
-    protected function buildMockClass($mock_name) {
+    protected function buildStaticMock($mock_name) {
         $mock_builder = new \MockyMockenstein\MockBuilder($this);
-        $mock = $mock_builder->buildClass($mock_name);
+        $mock = $mock_builder->buildStatic($mock_name);
         $this->replacements[] = $mock;
         return $mock;
     }
 
-    protected function monkeyPatchInstanceOf($class_name) {
-        $monkey_patcher = new \MockyMockenstein\MonkeyPatcher($this);
-        $instance = $monkey_patcher->patchInstance($class_name);
+    protected function spyForInstance($class_name) {
+        $spy_master = new \MockyMockenstein\SpyMaster($this);
+        $instance = $spy_master->patchInstance($class_name);
         $this->replacements[] = $instance;
         return $instance;
     }
 
-    protected function monkeyPatchClassOf($class_name) {
-        $monkey_patcher = new \MockyMockenstein\MonkeyPatcher($this);
-        $static = $monkey_patcher->patchClass($class_name);
+    protected function spyForStatic($class_name) {
+        $spy_master = new \MockyMockenstein\SpyMaster($this);
+        $static = $spy_master->patchStatic($class_name);
         $this->replacements[] = $static;
         return $static;
     }

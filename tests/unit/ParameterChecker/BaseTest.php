@@ -5,7 +5,7 @@ abstract class ParameterChecker_BaseTest extends MockyMockenstein_TestCase {
 
     function setUp() {
         parent::setUp();
-        $this->mock_test = $this->buildMockInstance('a test');
+        $this->mock_test = $this->buildInstanceMock('a test');
     }
 
     private function build($expected, $got, $position) {

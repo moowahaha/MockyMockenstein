@@ -1,7 +1,7 @@
 <?php
 namespace MockyMockenstein;
 
-class Replacement_MonkeyPatch_Static extends Replacement_MonkeyPatch {
+class Replacement_Spy_Static extends Replacement_Spy {
     protected $stub_class = '\MockyMockenstein\Stub_Static';
 
     public function willInstantiate($mock) {

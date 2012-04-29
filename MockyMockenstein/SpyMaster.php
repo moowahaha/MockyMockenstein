@@ -1,7 +1,7 @@
 <?php
 namespace MockyMockenstein;
 
-class MonkeyPatcher {
+class SpyMaster {
     private $test;
 
     public function __construct($test) {
@@ -10,25 +10,25 @@ class MonkeyPatcher {
 
     public function patchInstance($class_name) {
         $this->assertClassExists($class_name);
-        $monkey_patch = new Replacement_MonkeyPatch_Instance();
-        $monkey_patch->name = $class_name;
-        $monkey_patch->test = $this->test;
-        return $monkey_patch;
+        $spy = new Replacement_Spy_Instance();
+        $spy->name = $class_name;
+        $spy->test = $this->test;
+        return $spy;
     }
 
-    public function patchClass($class_name) {
+    public function patchStatic($class_name) {
         $this->assertClassExists($class_name);
-        $monkey_patch = new Replacement_MonkeyPatch_Static();
-        $monkey_patch->name = $class_name;
-        $monkey_patch->test = $this->test;
-        return $monkey_patch;
+        $spy = new Replacement_Spy_Static();
+        $spy->name = $class_name;
+        $spy->test = $this->test;
+        return $spy;
     }
 
     private function assertClassExists($class_name) {
         try {
             new \ReflectionClass($class_name); // just so PHP loads the class before runkit looks at it.
         } catch (\ReflectionException $e) {
-            throw new Exception("Cannot monkey patch $class_name: No such class $class_name.");
+            throw new Exception("Cannot spy on $class_name: No such class $class_name.");
         }
     }
 }
