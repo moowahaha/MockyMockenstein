@@ -11,7 +11,7 @@
   <active>yes</active>
  </lead>
  <date>2012-04-29</date>
- <time>11:32:10</time>
+ <time>11:41:33</time>
  <version>
   <release>0.1</release>
   <api>0.1</api>
@@ -67,15 +67,18 @@ https://github.com/moowahaha/MockyMockenstein#readme
     <min>5.3.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.0</min>
+    <min>1.5.6</min>
    </pearinstaller>
-  </required>
-  <optional>
    <package>
-    <name>Hamcrest</name>
-    <channel>hamcrest.googlecode.com/svn/pear</channel>
+    <name>test_helpers</name>
+    <channel>pear.phpunit.de</channel>
+    <min>1.1.0</min>
    </package>
-  </optional>
+   <package>
+    <name>runkit</name>
+    <channel>http://github.com/downloads/zenovich/runkit/runkit-1.0.2.tgz</channel>
+   </package>
+  </required>
  </dependencies>
  <phprelease>
   <filelist />
