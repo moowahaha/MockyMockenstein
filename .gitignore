@@ -2,3 +2,4 @@
 *.swo
 .idea
 *.tgz
+tmp/*
