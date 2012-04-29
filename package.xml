@@ -13,8 +13,8 @@
  <date>2012-04-29</date>
  <time>11:41:33</time>
  <version>
-  <release>0.1</release>
-  <api>0.1</api>
+  <release>0.1b</release>
+  <api>0.1b</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -82,8 +82,8 @@ https://github.com/moowahaha/MockyMockenstein#readme
  <changelog>
   <release>
    <version>
-    <release>0.1</release>
-    <api>0.1</api>
+    <release>0.1b</release>
+    <api>0.1b</api>
    </version>
    <stability>
     <release>alpha</release>
@@ -93,21 +93,6 @@ https://github.com/moowahaha/MockyMockenstein#readme
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
 All instuctions can be found here: https://github.com/moowahaha/MockyMockenstein#readme
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>0.7.2</release>
-    <api>0.7.2</api>
-   </version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api>
-   </stability>
-   <date>2012-04-29</date>
-   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
-   <notes>
-http://github.com/padraic/mockery#readme
    </notes>
   </release>
  </changelog>
