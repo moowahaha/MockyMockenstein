@@ -5,9 +5,13 @@ class SomeSortOfReplacementClass {}
 
 class RouterTest extends MockyMockenstein_TestCase {
     function testConstructorMapping() {
+        $mock_stub = $this->buildInstanceMock('a stub');
+        $mock_stub->willReceive('areExpectationsMet')->calledTimes(3)->andReturn(false);
+
         \MockyMockenstein\Router::addConstructorOverride(
             'SomeSortOfOriginalClass',
-            new SomeSortOfReplacementClass()
+            new SomeSortOfReplacementClass(),
+            $mock_stub
         );
 
         $this->assertEquals(
@@ -17,6 +21,11 @@ class RouterTest extends MockyMockenstein_TestCase {
 
         $this->assertEquals(
             'SomeSortOfReplacementClass',
+            get_class(new SomeSortOfOriginalClass())
+        );
+
+        $this->assertEquals(
+            get_class(new SomeSortOfOriginalClass()),
             get_class(new SomeSortOfOriginalClass())
         );
     }

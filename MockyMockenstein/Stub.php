@@ -14,6 +14,7 @@ abstract class Stub {
 
     public $mock_class_name;
     public $method_name;
+    public $is_constructor = false;
 
     public function __construct($params) {
         $this->mock_name = $params['mock_name'];
@@ -58,6 +59,9 @@ abstract class Stub {
     }
 
     public function andReturn($value) {
+        if ($this->is_constructor) {
+            throw new Exception('Invalid call to "andReturn": A constructor does not have return values');
+        }
         $this->return_value = $value;
         return $this;
     }
@@ -67,7 +71,7 @@ abstract class Stub {
     }
 
     public function assertExpectationsAreMet() {
-        if (!$this->calledCorrectNumberOfTimes()) {
+        if ($this->expected_run_count != null && !$this->calledCorrectNumberOfTimes()) {
             $this->test->fail(
                 $this->toString() . ' expected to be called ' . $this->expected_run_count . ' times, actually called ' . $this->run_count . ' times'
             );
@@ -89,10 +93,8 @@ abstract class Stub {
     }
 
     private function calledCorrectNumberOfTimes() {
-        if ($this->expected_run_count != null) {
-            if ($this->run_count != $this->expected_run_count) {
-                return false;
-            }
+        if ($this->run_count !== $this->expected_run_count) {
+            return false;
         }
 
         return true;

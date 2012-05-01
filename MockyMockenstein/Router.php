@@ -19,15 +19,25 @@ class Router {
         self::$routes[$class_name][$method_name] = $stubs;
     }
 
-    public static function addConstructorOverride($old_class, $mock) {
-        self::$constructors[$old_class] = get_class($mock);
+    public static function addConstructorOverride($old_class, $mock, $stub) {
+        if (!isset(self::$constructors[$old_class])) {
+            self::$constructors[$old_class] = array();
+        }
 
-        runkit_function_add(
-            self::CONSTRUCTOR_ROUTER, '$requested_class_name',
-            'return \\MockyMockenstein\\Router::routeToClass($requested_class_name);'
-        );
+        if (!isset(self::$constructors[$old_class]['replacements'])) {
+            self::$constructors[$old_class]['replacements'] = array();
+        }
 
-        set_new_overload(self::CONSTRUCTOR_ROUTER);
+        self::$constructors[$old_class]['replacements'][] = array('class' => get_class($mock), 'stub' => $stub);
+
+        if (!function_exists(self::CONSTRUCTOR_ROUTER)) {
+            runkit_function_add(
+                self::CONSTRUCTOR_ROUTER, '$requested_class_name',
+                'return \\MockyMockenstein\\Router::routeToClass($requested_class_name);'
+            );
+
+            set_new_overload(self::CONSTRUCTOR_ROUTER);
+        }
     }
 
     public static function clearAll() {
@@ -42,11 +52,22 @@ class Router {
     }
 
     public static function routeToClass($requested_class_name) {
-        if (isset(self::$constructors[$requested_class_name])) {
-            return self::$constructors[$requested_class_name];
+        if (!isset(self::$constructors[$requested_class_name]) || empty(self::$constructors[$requested_class_name]['replacements'])) {
+            return $requested_class_name;
         }
 
-        return $requested_class_name;
+        $replacement = self::$constructors[$requested_class_name]['replacements'][0];
+        $stub = $replacement['stub'];
+
+        if ($stub->areExpectationsMet()) {
+            array_shift(self::$constructors[$requested_class_name]['replacements']);
+            if (empty(self::$constructors[$requested_class_name]['replacements'])) {
+                return $requested_class_name;
+            }
+            $replacement = self::$constructors[$requested_class_name]['replacements'][0];
+        }
+
+        return $replacement['class'];
     }
 
     public static function routeToStub($class_name, $method_name, $method_params) {

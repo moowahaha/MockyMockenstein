@@ -87,8 +87,8 @@ abstract class Stub_BaseTest extends MockyMockenstein_TestCase {
 
     function testCalledAnyNumberOfTimes() {
         $this->expectNoError();
-        $this->stub->calledTimes(0);
-        $this->assertTrue($this->stub->areExpectationsMet());
+        $this->stub->calledAnytime();
+        $this->assertFalse($this->stub->areExpectationsMet());
     }
 
     function testUnexpectedCall() {
