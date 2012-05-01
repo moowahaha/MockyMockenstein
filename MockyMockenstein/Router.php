@@ -24,11 +24,7 @@ class Router {
             self::$constructors[$old_class] = array();
         }
 
-        if (!isset(self::$constructors[$old_class]['replacements'])) {
-            self::$constructors[$old_class]['replacements'] = array();
-        }
-
-        self::$constructors[$old_class]['replacements'][] = array('class' => get_class($mock), 'stub' => $stub);
+        self::$constructors[$old_class][] = array('class' => get_class($mock), 'stub' => $stub);
 
         if (!function_exists(self::CONSTRUCTOR_ROUTER)) {
             runkit_function_add(
@@ -52,19 +48,19 @@ class Router {
     }
 
     public static function routeToClass($requested_class_name) {
-        if (!isset(self::$constructors[$requested_class_name]) || empty(self::$constructors[$requested_class_name]['replacements'])) {
+        if (!isset(self::$constructors[$requested_class_name]) || empty(self::$constructors[$requested_class_name])) {
             return $requested_class_name;
         }
 
-        $replacement = self::$constructors[$requested_class_name]['replacements'][0];
+        $replacement = self::$constructors[$requested_class_name][0];
         $stub = $replacement['stub'];
 
         if ($stub->areExpectationsMet()) {
-            array_shift(self::$constructors[$requested_class_name]['replacements']);
-            if (empty(self::$constructors[$requested_class_name]['replacements'])) {
+            array_shift(self::$constructors[$requested_class_name]);
+            if (empty(self::$constructors[$requested_class_name])) {
                 return $requested_class_name;
             }
-            $replacement = self::$constructors[$requested_class_name]['replacements'][0];
+            $replacement = self::$constructors[$requested_class_name][0];
         }
 
         return $replacement['class'];
